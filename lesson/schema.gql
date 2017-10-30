@@ -1,0 +1,58 @@
+enum BloodType {
+  A
+  B
+  O
+  AB
+}
+
+enum HeightUnit {
+  CM
+  FOOT
+}
+
+type Idol {
+  id: ID!
+  # กลุ่มไง
+  group: Group
+  # ทีมไง
+  team: String
+  # รูป
+  picture: String
+  romaji: String
+  name: String
+  nickname: String
+  birthdate: String
+  birthplace: String
+  bloodType: BloodType
+  age: Int
+  height(unit: HeightUnit): Float
+  agency: String
+  generation: String
+}
+
+type Group {
+  id: ID!
+  name: String
+  location: String
+  since: Int
+}
+
+type Query {
+  # เอาไว้แสดลงผล Idol ไงจ้ะ
+  listIdol: [Idol]
+  listGroup: [Group]
+}
+
+inputType {
+  name: String
+}
+
+type Mutation {
+  login(username: String!, password: String!): String
+  createIdol(payload: IdolInput): Idol
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

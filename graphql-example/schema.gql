@@ -1,0 +1,46 @@
+enum HeightUnit {
+  CM
+  FOOT
+}
+type Group {
+  id: ID!
+  name: String
+  location: String
+  since: String
+}
+
+# Idol information
+type Idol {
+  id: ID! # the ! means that every author object _must_ have an id
+  # Member in team
+  team: String
+  picture: String
+  # Name in roman characters
+  romaji: String
+  # Name in local
+  name: String
+  birthdate: String
+  birthplace: String
+  age: Int
+  bloodType: String
+  height(unit: HeightUnit): Float
+  agency: String
+  generation: String
+  group: Group
+}
+
+type Query {
+  # Retrieve for idols information
+  idols(limit: Int): [Idol]
+  # Retrieve for groups information
+  groups: [Group]
+}
+
+type Mutation {
+  addIdol(name: String, team: String): Idol
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
